@@ -6,7 +6,7 @@ package com.github.curriculeon.arcade;
  * All players must have reference to the `ArcadeAccount` used to log into the `Arcade` system.
  * All players are capable of `play`ing a game.
  */
-public interface PlayerInterface {
+public interface PlayerInterface <SomeGameComponent>{
     /**
      * @return the `ArcadeAccount` used to log into the `Arcade` system to play this game
      */
@@ -17,5 +17,5 @@ public interface PlayerInterface {
      * @param <SomeReturnType> specify any return type you would like here
      * @return whatever return value you would like
      */
-    <SomeReturnType> SomeReturnType play();
+    void play(SomeGameComponent gameComponent, String userInput);
 }

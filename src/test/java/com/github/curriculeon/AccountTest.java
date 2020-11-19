@@ -24,6 +24,7 @@ public class AccountTest {
         /// then
         String check = testAccount.getAccountName();
         Assert.assertEquals(testName, check);
+        System.out.println("Account Name Test Passed");
     }
 
 
@@ -41,7 +42,39 @@ public class AccountTest {
         // then
         String passwordCheck = testAccount.getAccountPassword();
         Assert.assertEquals(passwordCheck,password);
-        
+        System.out.println("Account Password Test Passed");
+
     }
 
+    @Test
+    public void testChangeAccountName(){
+        // given
+        String testName = "testName";
+        String password = "pass";
+        ArcadeAccount testAccount = new ArcadeAccount( testName, password);
+        Assert.assertEquals(testName, testAccount.getAccountName());
+        // when
+        String newName = "somethingNew";
+        testAccount.setAccountName(newName);
+        // then
+        Assert.assertEquals(newName, testAccount.getAccountName());
+        System.out.println("Account change name Test Passed");
+
+    }
+
+
+    @Test
+    public void testChangeAccountPassword(){
+        // given
+        String testName = "testName";
+        String password = "pass";
+        ArcadeAccount testAccount = new ArcadeAccount( testName, password);
+        Assert.assertEquals(password, testAccount.getAccountPassword());
+        // when
+        String newPass = "somethingNew";
+        testAccount.setAccountPassword(newPass);
+        // then
+        Assert.assertEquals(newPass, testAccount.getAccountPassword());
+        System.out.println("Account change password Test Passed");
+    }
 }

@@ -77,4 +77,33 @@ public class AccountTest {
         Assert.assertEquals(newPass, testAccount.getAccountPassword());
         System.out.println("Account change password Test Passed");
     }
+
+    @Test // (expected = NullPointerException.class)
+    public void testNullName(){
+        // given
+        String nullName = null;
+        String nullPass = null;
+
+        // when
+        ArcadeAccount badAccount = new ArcadeAccount(nullName, nullPass);
+
+        // then
+        Assert.assertNull(badAccount.getAccountName());
+        System.out.println("Account null name Test Passed");
+    }
+
+    @Test // (expected = NullPointerException.class)
+    public void testNullPassword(){
+        // given
+        String nullName = null;
+        String nullPass = null;
+
+        // when
+        ArcadeAccount badAccount = new ArcadeAccount(nullName, nullPass);
+
+        // then
+        Assert.assertNull(badAccount.getAccountPassword());
+        System.out.println("Account null password Test Passed");
+    }
+
 }

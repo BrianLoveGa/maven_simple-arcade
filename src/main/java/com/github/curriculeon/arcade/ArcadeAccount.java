@@ -10,6 +10,9 @@ public class ArcadeAccount {
     public String accountName;
     public String accountPassword;
 
+    public ArcadeAccount() {
+    }
+
     public ArcadeAccount(String accountName, String accountPassword) {
         this.accountName = accountName;
         this.accountPassword = accountPassword;

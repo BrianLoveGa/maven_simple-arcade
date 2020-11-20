@@ -32,24 +32,29 @@ public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
     public void run() {
         IOConsole console = new IOConsole(AnsiColor.GREEN);
         String guessInput = "";
+        int good = 0;
+        int bad = 0;
         do {
             List<String> winnerList = new ArrayList<>();
             int mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
             for (PlayerInterface player : players) {
-                 guessInput = player.play();
+                guessInput = player.play();
 
                 String x = String.valueOf(mysteryNumber);
                 if (guessInput.equals(x)) {
                     console.println("You guessed the number :-) !! ");
                     winnerList.add(player.getArcadeAccount().getName());
+                    good++;
                 } else {
                     console.println("you did not guess the number :-( ");
+                    bad++;
                 }
             }
             console.println("the mystery number was : " + mysteryNumber + " !");
             console.println("The following is a list of players who guessed the correct value:");
             console.println(winnerList.toString());
+            console.println("correct = " + good + "  incorrect = " + bad);
 
-        }while (!"quit".equalsIgnoreCase(guessInput));
+        } while (!"quit".equalsIgnoreCase(guessInput));
     }
 }

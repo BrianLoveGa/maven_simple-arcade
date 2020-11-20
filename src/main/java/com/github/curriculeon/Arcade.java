@@ -42,6 +42,8 @@ public class Arcade implements Runnable {
                         play(new RedOrBlackGame(), new RedOrBlackPlayer(arcadeAccount));
                     } else if ("NUMBERGUESS".equalsIgnoreCase(gameSelectionInput)) {
                         play(new NumberGuessGame(), new NumberGuessPlayer(arcadeAccount));
+                    } else if ("quit".equalsIgnoreCase(gameSelectionInput)) {
+                        System.exit(0);
                     } else {
                         // TODO - implement better exception handling
                         String errorMessage = "[ %s ] is an invalid game selection";
@@ -74,7 +76,7 @@ public class Arcade implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ REDORBLACK ]")
+                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ REDORBLACK ], [quit]")
                 .toString());
     }
 

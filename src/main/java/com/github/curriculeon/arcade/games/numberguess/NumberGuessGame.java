@@ -30,16 +30,25 @@ public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
 
     @Override
     public void run() {
-        IOConsole console = new IOConsole(AnsiColor.RED);
-        List<PlayerInterface> winnerList = new ArrayList<>();
-        Integer mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
-        for (PlayerInterface player : players) {
-            Integer numberGuessedByPlayer = player.play();
-            if (numberGuessedByPlayer == mysteryNumber) {
-                winnerList.add(player);
+        IOConsole console = new IOConsole(AnsiColor.GREEN);
+        String numberGuessedByPlayer = "";
+        do {
+            List<PlayerInterface> winnerList = new ArrayList<>();
+            int mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
+            for (PlayerInterface player : players) {
+                String guess = player.play();
+                int x = Integer.parseInt(guess);
+                if (x == mysteryNumber) {
+                    console.println("You guessed the number :-) !! ");
+                    winnerList.add(player);
+                } else {
+                    console.println("you did not guess the number :-( ");
+                }
             }
-        }
-        console.println("The following is a list of players who guessed the correct value:");
-        console.println(winnerList.toString());
+            console.println("the mystery number was : " + mysteryNumber + " !");
+            console.println("The following is a list of players who guessed the correct value:");
+            console.println(winnerList.toString());
+            
+        }while (!"quit".equalsIgnoreCase(numberGuessedByPlayer));
     }
 }

@@ -26,7 +26,7 @@ public class SlotsPlayer implements PlayerInterface {
         return new IOConsole().getStringInput(String.format(new StringJoiner("\n")
                 .add("[ %s ] it's your turn!")
                 .add("From here you can select any of the following options:")
-                .add("[ pull-lever ], [ view-slots ], [ exit ]")
+                .add("[ pull-lever ], [ view-slots ], [ quit ]")
                 .toString(), arcadeAccount.getName()));
     }
 }

@@ -20,7 +20,7 @@ public class NumberGuessPlayer implements PlayerInterface {
     }
 
     @Override
-    public Integer play() {
-        return new IOConsole().getIntegerInput("Please enter the number you would like to guess.");
+    public String play() {
+        return new IOConsole().getStringInput("Please enter the number you would like to guess [ 0 - 9 ] or [quit]");
     }
 }

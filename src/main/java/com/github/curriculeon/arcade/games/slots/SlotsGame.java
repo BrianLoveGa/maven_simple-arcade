@@ -55,7 +55,7 @@ public class SlotsGame implements GameInterface<SlotsPlayer> {
                     case "exit":
                         break;
                 }
-            } while (!"exit".equalsIgnoreCase(userInput));
+            } while (!"quit".equalsIgnoreCase(userInput));
         }
     }
 }

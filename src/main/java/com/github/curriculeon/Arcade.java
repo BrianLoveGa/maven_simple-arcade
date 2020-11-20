@@ -4,6 +4,8 @@ import com.github.curriculeon.arcade.ArcadeAccount;
 import com.github.curriculeon.arcade.ArcadeAccountManager;
 import com.github.curriculeon.arcade.GameInterface;
 import com.github.curriculeon.arcade.PlayerInterface;
+import com.github.curriculeon.arcade.games.cardgames.highlowcard.HighLowCardGame;
+import com.github.curriculeon.arcade.games.cardgames.highlowcard.HighLowPlayer;
 import com.github.curriculeon.arcade.games.cardgames.redorblack.RedOrBlackGame;
 import com.github.curriculeon.arcade.games.cardgames.redorblack.RedOrBlackPlayer;
 import com.github.curriculeon.arcade.games.numberguess.NumberGuessGame;
@@ -42,6 +44,8 @@ public class Arcade implements Runnable {
                         play(new RedOrBlackGame(), new RedOrBlackPlayer(arcadeAccount));
                     } else if ("NUMBERGUESS".equalsIgnoreCase(gameSelectionInput)) {
                         play(new NumberGuessGame(), new NumberGuessPlayer(arcadeAccount));
+                    } else if ("HIGHLOWCARD".equalsIgnoreCase(gameSelectionInput)) {
+                        play(new HighLowCardGame(), new HighLowPlayer(arcadeAccount));
                     } else if ("quit".equalsIgnoreCase(gameSelectionInput)) {
                         System.exit(0);
                     } else {
@@ -76,7 +80,7 @@ public class Arcade implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ REDORBLACK ], [quit]")
+                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ REDORBLACK ], [ HIGHLOWCARD ], [quit]")
                 .toString());
     }
 

@@ -31,6 +31,8 @@ public class RedOrBlackGame implements GameInterface<RedOrBlackPlayer> {
     public void run() {
         IOConsole console = new IOConsole(AnsiColor.CYAN);
         String userInput = null;
+        int good = 0;
+        int bad = 0;
         do {
             deck.shuffle();
             Card card = deck.pop();
@@ -47,10 +49,13 @@ public class RedOrBlackGame implements GameInterface<RedOrBlackPlayer> {
                 if (userInputIsValid) {
                     if (userIsCorrect) {
                         console.println("You were correct!");
+                        good++;
                     } else {
                         console.println("You were incorrect!");
+                        bad++;
                     }
                     console.println("The value of the card was [ %s ]", card.toString());
+                    console.println("# correct " + good + "  number wrong : " + bad);
                 }
             }
             deck.push(card);

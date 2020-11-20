@@ -31,16 +31,17 @@ public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
     @Override
     public void run() {
         IOConsole console = new IOConsole(AnsiColor.GREEN);
-        String numberGuessedByPlayer = "";
+        String ifPlayerQuits = "";
         do {
-            List<PlayerInterface> winnerList = new ArrayList<>();
+            List<String> winnerList = new ArrayList<>();
             int mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
             for (PlayerInterface player : players) {
                 String guess = player.play();
+                ifPlayerQuits = guess;
                 int x = Integer.parseInt(guess);
                 if (x == mysteryNumber) {
                     console.println("You guessed the number :-) !! ");
-                    winnerList.add(player);
+                    winnerList.add(player.getArcadeAccount().getName());
                 } else {
                     console.println("you did not guess the number :-( ");
                 }
@@ -48,7 +49,7 @@ public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
             console.println("the mystery number was : " + mysteryNumber + " !");
             console.println("The following is a list of players who guessed the correct value:");
             console.println(winnerList.toString());
-            
-        }while (!"quit".equalsIgnoreCase(numberGuessedByPlayer));
+
+        }while (!"quit".equalsIgnoreCase(ifPlayerQuits));
     }
 }

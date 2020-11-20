@@ -23,7 +23,9 @@ public class Arcade implements Runnable {
     public void run() {
         ArcadeAccountManager arcadeAccountManager = new ArcadeAccountManager();
         ArcadeAccount testAccount = arcadeAccountManager.createAccount("leon", "hunter");
+        ArcadeAccount testB = arcadeAccountManager.createAccount("b", "b");
         arcadeAccountManager.registerAccount(testAccount);
+        arcadeAccountManager.registerAccount(testB);
         String arcadeDashBoardInput;
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();

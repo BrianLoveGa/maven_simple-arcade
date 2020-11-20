@@ -59,14 +59,14 @@ public class Arcade implements Runnable {
                 ArcadeAccount newAccount = arcadeAccountManager.createAccount(accountName, accountPassword);
                 arcadeAccountManager.registerAccount(newAccount);
             }
-        } while (!"logout".equals(arcadeDashBoardInput));
+        } while (!"quit".equals(arcadeDashBoardInput));
     }
 
     private String getArcadeDashboardInput() {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Arcade Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ create-account ], [ select-game ], [logout]")
+                .append("\n\t[ create-account ], [ select-game ], [quit]")
                 .toString());
     }
 

@@ -31,15 +31,15 @@ public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
     @Override
     public void run() {
         IOConsole console = new IOConsole(AnsiColor.GREEN);
-        String ifPlayerQuits = "";
+        String guessInput = "";
         do {
             List<String> winnerList = new ArrayList<>();
             int mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
             for (PlayerInterface player : players) {
-                String guess = player.play();
-                ifPlayerQuits = guess;
-                int x = Integer.parseInt(guess);
-                if (x == mysteryNumber) {
+                 guessInput = player.play();
+
+                String x = String.valueOf(mysteryNumber);
+                if (guessInput.equals(x)) {
                     console.println("You guessed the number :-) !! ");
                     winnerList.add(player.getArcadeAccount().getName());
                 } else {
@@ -50,6 +50,6 @@ public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
             console.println("The following is a list of players who guessed the correct value:");
             console.println(winnerList.toString());
 
-        }while (!"quit".equalsIgnoreCase(ifPlayerQuits));
+        }while (!"quit".equalsIgnoreCase(guessInput));
     }
 }

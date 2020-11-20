@@ -22,7 +22,7 @@ public class AccountTest {
         ArcadeAccount testAccount = new ArcadeAccount( testName, password);
 
         /// then
-        String check = testAccount.getAccountName();
+        String check = testAccount.getName();
         Assert.assertEquals(testName, check);
         System.out.println("Account Name Test Passed");
     }
@@ -40,7 +40,7 @@ public class AccountTest {
         ArcadeAccount testAccount = new ArcadeAccount( testName, password);
 
         // then
-        String passwordCheck = testAccount.getAccountPassword();
+        String passwordCheck = testAccount.getPassword();
         Assert.assertEquals(passwordCheck,password);
         System.out.println("Account Password Test Passed");
 
@@ -52,12 +52,12 @@ public class AccountTest {
         String testName = "testName";
         String password = "pass";
         ArcadeAccount testAccount = new ArcadeAccount( testName, password);
-        Assert.assertEquals(testName, testAccount.getAccountName());
+        Assert.assertEquals(testName, testAccount.getName());
         // when
         String newName = "somethingNew";
-        testAccount.setAccountName(newName);
+        testAccount.setName(newName);
         // then
-        Assert.assertEquals(newName, testAccount.getAccountName());
+        Assert.assertEquals(newName, testAccount.getName());
         System.out.println("Account change name Test Passed");
 
     }
@@ -69,12 +69,12 @@ public class AccountTest {
         String testName = "testName";
         String password = "pass";
         ArcadeAccount testAccount = new ArcadeAccount( testName, password);
-        Assert.assertEquals(password, testAccount.getAccountPassword());
+        Assert.assertEquals(password, testAccount.getPassword());
         // when
         String newPass = "somethingNew";
-        testAccount.setAccountPassword(newPass);
+        testAccount.setPassword(newPass);
         // then
-        Assert.assertEquals(newPass, testAccount.getAccountPassword());
+        Assert.assertEquals(newPass, testAccount.getPassword());
         System.out.println("Account change password Test Passed");
     }
 
@@ -88,7 +88,7 @@ public class AccountTest {
         ArcadeAccount badAccount = new ArcadeAccount(nullName, nullPass);
 
         // then
-        Assert.assertNull(badAccount.getAccountName());
+        Assert.assertNull(badAccount.getName());
         System.out.println("Account null name Test Passed");
     }
 
@@ -102,7 +102,7 @@ public class AccountTest {
         ArcadeAccount badAccount = new ArcadeAccount(nullName, nullPass);
 
         // then
-        Assert.assertNull(badAccount.getAccountPassword());
+        Assert.assertNull(badAccount.getPassword());
         System.out.println("Account null password Test Passed");
     }
 

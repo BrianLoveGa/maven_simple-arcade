@@ -1,8 +1,8 @@
 package com.github.curriculeon.arcade;
 
-
 import java.util.ArrayList;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by leon on 7/21/2020.
@@ -10,9 +10,20 @@ import java.util.*;
  * it is advised that every instruction in this class is logged
  */
 public class ArcadeAccountManager {
+    private List<ArcadeAccount> arcadeAccountList;
+
+    public ArcadeAccountManager() {
+        this(new ArrayList<>());
+    }
+
+    public ArcadeAccountManager(ArcadeAccount... arcadeAccounts) {
+        this(Arrays.asList(arcadeAccounts));
+    }
 
 
-    private List<ArcadeAccount> arcadeAccountList = new ArrayList<>();
+    public ArcadeAccountManager(List<ArcadeAccount> arcadeAccountList) {
+        this.arcadeAccountList = arcadeAccountList;
+    }
 
     /**
      * @param accountName     name of account to be returned
@@ -20,12 +31,18 @@ public class ArcadeAccountManager {
      * @return `ArcadeAccount` with specified `accountName` and `accountPassword`
      */
     public ArcadeAccount getAccount(String accountName, String accountPassword) {
-        for(ArcadeAccount account : arcadeAccountList) {
-            if(accountName.equals(account.getAccountName()) && accountPassword.equals(account.getAccountPassword())) {
-                return account;
-            }
-        }
-        return null;
+        return arcadeAccountList
+                .stream()
+                .filter(account -> {
+                    String currentAccountName = account.getName();
+                    String currentAccountPassword = account.getPassword();
+                    boolean validName = currentAccountName.equals(accountName);
+                    boolean validPassword = currentAccountPassword.equals(accountPassword);
+                    boolean validLogin = validName && validPassword;
+                    return validLogin;
+                })
+                .findFirst()
+                .get();
     }
 
     /**
@@ -36,10 +53,7 @@ public class ArcadeAccountManager {
      * @return new instance of `ArcadeAccount` with specified `accountName` and `accountPassword`
      */
     public ArcadeAccount createAccount(String accountName, String accountPassword) {
-
-        ArcadeAccount arcadeAccount = new ArcadeAccount(accountName, accountPassword);
-
-        return arcadeAccount;
+        return new ArcadeAccount(accountName, accountPassword);
     }
 
     /**

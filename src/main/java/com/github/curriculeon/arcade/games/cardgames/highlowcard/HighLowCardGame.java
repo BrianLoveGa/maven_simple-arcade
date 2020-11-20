@@ -51,20 +51,20 @@ public class HighLowCardGame implements GameInterface <HighLowPlayer> {
                 boolean cardIsLower = card.getRank().cardValue()>=nextCard.getRank().cardValue();
                 if(userInput.equalsIgnoreCase("higher") && cardIsHigher){
                     console.println("you guessed correct");
-                    console.println("The value of the card  [ %s ] was higher than [%s]", nextCard.toString(), card.toString());
+                    console.println("The value of the next card  [ %s ] was higher than [%s]", nextCard.toString(), card.toString());
                     good++;
                 } else if (userInput.equalsIgnoreCase("lower") && cardIsLower){
                     console.println("you guessed correct");
-                    console.println("The value of the  card  [ %s ] was lower than [%s]", nextCard.toString(), card.toString());
+                    console.println("The value of the next card  [ %s ] was lower than [%s]", nextCard.toString(), card.toString());
                     good++;
                 } else {
                     console.println("you guessed incorrect  :-( ");
-                    console.println("The value of the card  was [ %s ] ", nextCard.toString());
+                    console.println("The value of the next card  was [ %s ] ", nextCard.toString());
                     bad++;
 
                 }
 
-            } console.println("Score is correct :" +good+" wrong :" +bad);
+            } console.println("Your score is _-_ correct :" +good+" wrong :" +bad);
 
 
         } while (!"quit".equalsIgnoreCase(userInput));

@@ -47,8 +47,8 @@ public class HighLowCardGame implements GameInterface <HighLowPlayer> {
                         "  Will the next card be [higher] , or [lower] ? or you can  [quit]");
                 userInput = player.play();
                 Card nextCard = deck.pop();
-                boolean cardIsHigher = card.getRank().cardValue()<=nextCard.getRank().cardValue();
-                boolean cardIsLower = card.getRank().cardValue()>=nextCard.getRank().cardValue();
+                boolean cardIsHigher = card.getRank().getValue()<=nextCard.getRank().getValue();
+                boolean cardIsLower = card.getRank().getValue()>=nextCard.getRank().getValue();
                 if(userInput.equalsIgnoreCase("higher") && cardIsHigher){
                     console.println("you guessed correct");
                     console.println("The value of the next card  [ %s ] was higher than [%s]", nextCard.toString(), card.toString());

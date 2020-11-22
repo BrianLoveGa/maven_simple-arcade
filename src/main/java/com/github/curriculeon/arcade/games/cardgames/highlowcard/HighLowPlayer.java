@@ -23,7 +23,8 @@ public class HighLowPlayer implements PlayerInterface {
 
     @Override
     public String play() {
-        return new IOConsole().getStringInput("Welcome to the higher or lower card game !");
+        return new IOConsole().getStringInput("Ace is the lowest (1) & King is highest (13) !! Let's Play \n " +
+                " all number cards are their face value with Jacks  (11) and Queens  (12) ");
     }
 }
 

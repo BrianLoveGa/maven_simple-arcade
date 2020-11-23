@@ -1,7 +1,8 @@
 package com.github.curriculeon.arcade.games.slots;
 
-import com.github.curriculeon.arcade.GameInterface;
-import com.github.curriculeon.arcade.PlayerInterface;
+import com.github.curriculeon.arcade.games.AbstractGame;
+import com.github.curriculeon.arcade.games.GameInterface;
+import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.utils.IOConsole;
 
 import java.util.ArrayList;
@@ -10,52 +11,27 @@ import java.util.List;
 /**
  * Created by leon on 7/21/2020.
  */
-public class SlotsGame implements GameInterface<SlotsPlayer> {
-    private SlotsReelImage image1;
-    private SlotsReelImage image2;
-    private SlotsReelImage image3;
-    private IOConsole console = new IOConsole();
-    private List<SlotsPlayer> playerList;
-
-
-    public SlotsGame() {
-        this(new ArrayList<>());
-    }
-
-    public SlotsGame(List<SlotsPlayer> playerList) {
-        this.playerList = playerList;
-    }
-
-    public void spin() {
-        this.image1 = SlotsReelImage.getRandom();
-        this.image2 = SlotsReelImage.getRandom();
-        this.image3 = SlotsReelImage.getRandom();
-    }
-
-    @Override
-    public List<SlotsPlayer> getPlayerList() {
-        return playerList;
-    }
+public class SlotsGame extends AbstractGame<SlotsPlayer> {
 
     @Override
     public void run() {
-        for (PlayerInterface player : playerList) {
+        for (PlayerInterface player : getPlayerList()) {
+            SlotsReelImage image1 = null;
+            SlotsReelImage image2 = null;
+            SlotsReelImage image3 = null;
             String userInput;
             do {
                 userInput = player.play();
-                switch (userInput.toLowerCase()) {
-                    case "pull-lever":
-                        spin();
-                        break;
-
-                    case "view-slots":
-                        console.println("Results: || %s || %s || %s", image1, image2, image3);
-                        break;
-
-                    case "exit":
-                        break;
+                if ("pull-lever".equalsIgnoreCase(userInput)) {
+                    image1 = SlotsReelImage.getRandom();
+                    image2 = SlotsReelImage.getRandom();
+                    image3 = SlotsReelImage.getRandom();
+                } else if ("view-slots".equalsIgnoreCase(userInput)) {
+                    getIOConsole().println("|| %s || %s || %s ||", image1, image2, image3);
+                } else if ("exit".equalsIgnoreCase(userInput)) {
+                    break;
                 }
-            } while (!"quit".equalsIgnoreCase(userInput));
+            } while (!"exit".equalsIgnoreCase(userInput));
         }
     }
 }

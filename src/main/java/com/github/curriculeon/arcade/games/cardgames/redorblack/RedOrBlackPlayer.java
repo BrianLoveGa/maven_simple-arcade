@@ -1,23 +1,16 @@
 package com.github.curriculeon.arcade.games.cardgames.redorblack;
 
 import com.github.curriculeon.arcade.ArcadeAccount;
-import com.github.curriculeon.arcade.PlayerInterface;
-import com.github.curriculeon.utils.IOConsole;
+import com.github.curriculeon.arcade.games.AbstractPlayer;
 
-public class RedOrBlackPlayer implements PlayerInterface {
-    private ArcadeAccount arcadeAccount;
 
+public class RedOrBlackPlayer extends AbstractPlayer {
     public RedOrBlackPlayer(ArcadeAccount arcadeAccount) {
-        this.arcadeAccount = arcadeAccount;
-    }
-
-    @Override
-    public ArcadeAccount getArcadeAccount() {
-        return arcadeAccount;
+        super(arcadeAccount);
     }
 
     @Override
     public String play() {
-        return new IOConsole().getStringInput("Your options are [ red ], [ black ], [ quit ]");
+        return getIOConsole().getStringInput("Your options are [ red ], [ black ], [ quit ]");
     }
 }

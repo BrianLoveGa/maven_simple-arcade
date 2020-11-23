@@ -1,7 +1,8 @@
 package com.github.curriculeon.arcade.games.numberguess;
 
-import com.github.curriculeon.arcade.GameInterface;
-import com.github.curriculeon.arcade.PlayerInterface;
+import com.github.curriculeon.arcade.games.AbstractGame;
+import com.github.curriculeon.arcade.games.GameInterface;
+import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.utils.AnsiColor;
 import com.github.curriculeon.utils.IOConsole;
 
@@ -12,32 +13,24 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Created by leon on 7/21/2020.
  */
-public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
-    private final List<NumberGuessPlayer> players;
-
-    public NumberGuessGame() {
-        this(new ArrayList<>());
-    }
-
-    public NumberGuessGame(List<NumberGuessPlayer> players) {
-        this.players = players;
-    }
+public class NumberGuessGame extends AbstractGame<NumberGuessPlayer> {
+    private int mysteryNumber;
 
     @Override
-    public List<NumberGuessPlayer> getPlayerList() {
-        return players;
+    public void setup() {
+        this.mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
     }
 
     @Override
     public void run() {
-        IOConsole console = new IOConsole(AnsiColor.GREEN);
+        IOConsole console = getIOConsole(AnsiColor.GREEN);
         String guessInput = "";
         int good = 0;
         int bad = 0;
         do {
             List<String> winnerList = new ArrayList<>();
             int mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
-            for (PlayerInterface player : players) {
+            for (NumberGuessPlayer player : getPlayerList()) {
                 guessInput = player.play();
 
                 String x = String.valueOf(mysteryNumber);
@@ -56,5 +49,9 @@ public class NumberGuessGame implements GameInterface<NumberGuessPlayer> {
             console.println("correct = " + good + "  incorrect = " + bad);
 
         } while (!"quit".equalsIgnoreCase(guessInput));
+    }
+
+    public int getMysteryNumber() {
+        return mysteryNumber;
     }
 }

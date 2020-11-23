@@ -1,47 +1,31 @@
 package com.github.curriculeon.arcade.games.cardgames.highlowcard;
 
-import com.github.curriculeon.arcade.GameInterface;
-import com.github.curriculeon.arcade.PlayerInterface;
+import com.github.curriculeon.arcade.games.AbstractGame;
 import com.github.curriculeon.arcade.games.cardgames.utils.Card;
 import com.github.curriculeon.arcade.games.cardgames.utils.Deck;
 import com.github.curriculeon.utils.AnsiColor;
 import com.github.curriculeon.utils.IOConsole;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by BWL on 11/20/2020.
  */
 
-public class HighLowCardGame implements GameInterface <HighLowPlayer> {
+public class HighLowCardGame extends AbstractGame<HighLowPlayer> {
 
     private final Deck deck = new Deck();
-    private final List<HighLowPlayer> playerList;
-
-    public HighLowCardGame() {
-        this(new ArrayList<>());
-    }
-
-    public HighLowCardGame(List<HighLowPlayer> playerList) {
-        this.playerList = playerList;
-    }
-
-    @Override
-    public List<HighLowPlayer> getPlayerList() {
-        return playerList;
-    }
 
     @Override
     public void run() {
-        IOConsole console = new IOConsole(AnsiColor.YELLOW);
+        IOConsole console = getIOConsole(AnsiColor.YELLOW);
         String userInput = null;
         int good = 0;
         int bad = 0;
         do {
             deck.shuffle();
             Card card = deck.pop();
-            for (PlayerInterface player : playerList) {
+            for (HighLowPlayer player : getPlayerList()) {
                 console.println("The value of the current card is [ %s ]", card.toString());
                 console.println(player.getArcadeAccount().getName() +
                         "  Will the next card be [higher] , or [lower] ? or you can  [quit]");
@@ -52,10 +36,12 @@ public class HighLowCardGame implements GameInterface <HighLowPlayer> {
                 if(userInput.equalsIgnoreCase("higher") && cardIsHigher){
                     console.println("you guessed correct");
                     console.println("The value of the next card  [ %s ] was higher than [%s]", nextCard.toString(), card.toString());
+                    getWinnerList().add(player);
                     good++;
                 } else if (userInput.equalsIgnoreCase("lower") && cardIsLower){
                     console.println("you guessed correct");
                     console.println("The value of the next card  [ %s ] was lower than [%s]", nextCard.toString(), card.toString());
+                    getWinnerList().add(player);
                     good++;
                 } else {
                     console.println("you guessed incorrect  :-( ");
@@ -65,6 +51,8 @@ public class HighLowCardGame implements GameInterface <HighLowPlayer> {
                 }
 
             } console.println("Your score is _-_ correct :" +good+" wrong :" +bad);
+            console.println("The following is a list of winners:");
+            console.println(getWinnerList().toString());
 
 
         } while (!"quit".equalsIgnoreCase(userInput));

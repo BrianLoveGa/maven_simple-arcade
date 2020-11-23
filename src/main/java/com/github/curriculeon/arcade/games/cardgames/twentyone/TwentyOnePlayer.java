@@ -1,20 +1,17 @@
 package com.github.curriculeon.arcade.games.cardgames.twentyone;
 
 import com.github.curriculeon.arcade.ArcadeAccount;
-import com.github.curriculeon.arcade.PlayerInterface;
+import com.github.curriculeon.arcade.games.AbstractPlayer;
+import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.utils.IOConsole;
 
-public class TwentyOnePlayer implements PlayerInterface {
-    private ArcadeAccount arcadeAccount;
+public class TwentyOnePlayer extends AbstractPlayer {
+
 
     public TwentyOnePlayer(ArcadeAccount arcadeAccount) {
-        this.arcadeAccount = arcadeAccount;
+        super(arcadeAccount);
     }
 
-    @Override
-    public ArcadeAccount getArcadeAccount() {
-        return arcadeAccount;
-    }
 
     @Override
     public String play() {

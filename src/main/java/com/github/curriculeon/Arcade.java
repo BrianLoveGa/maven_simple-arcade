@@ -2,8 +2,8 @@ package com.github.curriculeon;
 
 import com.github.curriculeon.arcade.ArcadeAccount;
 import com.github.curriculeon.arcade.ArcadeAccountManager;
-import com.github.curriculeon.arcade.GameInterface;
-import com.github.curriculeon.arcade.PlayerInterface;
+import com.github.curriculeon.arcade.games.GameInterface;
+import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.arcade.games.cardgames.highlowcard.HighLowCardGame;
 import com.github.curriculeon.arcade.games.cardgames.highlowcard.HighLowPlayer;
 import com.github.curriculeon.arcade.games.cardgames.redorblack.RedOrBlackGame;

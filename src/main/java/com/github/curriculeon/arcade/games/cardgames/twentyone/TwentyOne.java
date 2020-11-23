@@ -1,35 +1,26 @@
 package com.github.curriculeon.arcade.games.cardgames.twentyone;
-import com.github.curriculeon.arcade.GameInterface;
-import com.github.curriculeon.arcade.PlayerInterface;
+import com.github.curriculeon.arcade.games.AbstractGame;
+import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.arcade.games.cardgames.utils.Card;
 import com.github.curriculeon.arcade.games.cardgames.utils.Deck;
 import com.github.curriculeon.utils.AnsiColor;
 import com.github.curriculeon.utils.IOConsole;
 
 
-import java.util.List;
 
 /**
  * Created by BWL on 11/20/2020.
  */
 
-public class TwentyOne implements GameInterface <TwentyOnePlayer> {
+public class TwentyOne extends AbstractGame<TwentyOnePlayer> {
 
     private final Deck deck = new Deck();
-    private final List<TwentyOnePlayer> playerList;
 
-    public TwentyOne(List<TwentyOnePlayer> playerList) {
-        this.playerList = playerList;
-    }
 
-    @Override
-    public List<TwentyOnePlayer> getPlayerList() {
-        return playerList;
-    }
 
     @Override
     public void run() {
-        IOConsole console = new IOConsole(AnsiColor.YELLOW);
+        IOConsole console = getIOConsole(AnsiColor.YELLOW);
         String userInput = null;
         int handsWon = 0;
         int handsLost = 0;
@@ -49,7 +40,7 @@ public class TwentyOne implements GameInterface <TwentyOnePlayer> {
             Card eighthNextCard = deck.pop();
 
 
-            for (PlayerInterface player : playerList) {
+            for (TwentyOnePlayer player : getPlayerList()) {
                 console.println("Your current cards are [ %s ] & [ %s ]", playerFirstCard.toString(), playerSecondCard.toString());
                 console.println("The dealer currently has [ %s ] & a card face down",dealerFirstCard.toString());
                 console.println(player.getArcadeAccount().getName() +

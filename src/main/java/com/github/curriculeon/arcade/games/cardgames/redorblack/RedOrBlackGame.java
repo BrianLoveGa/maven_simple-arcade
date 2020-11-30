@@ -1,18 +1,30 @@
 package com.github.curriculeon.arcade.games.cardgames.redorblack;
 
 import com.github.curriculeon.arcade.games.AbstractGame;
-import com.github.curriculeon.arcade.games.GameInterface;
-import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.arcade.games.cardgames.utils.Card;
 import com.github.curriculeon.arcade.games.cardgames.utils.Deck;
 import com.github.curriculeon.utils.AnsiColor;
 import com.github.curriculeon.utils.IOConsole;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class RedOrBlackGame extends AbstractGame<RedOrBlackPlayer> {
-    private final Deck deck = new Deck();
+    private Deck deck;
+    private Card card;
+
+    public RedOrBlackGame() {
+        this(new Deck());
+    }
+
+    public RedOrBlackGame(Deck deck) {
+        this.deck = deck;
+    }
+
+    @Override
+    public void setup() {
+        deck.shuffle();
+        this.card = deck.pop();
+    }
 
     @Override
     public void run() {
@@ -20,7 +32,7 @@ public class RedOrBlackGame extends AbstractGame<RedOrBlackPlayer> {
         String userInput = null;
         int good = 0;
         int bad = 0;
-        do {
+
             deck.shuffle();
             Card card = deck.pop();
             for (RedOrBlackPlayer player : getPlayerList()) {
@@ -28,7 +40,7 @@ public class RedOrBlackGame extends AbstractGame<RedOrBlackPlayer> {
                 boolean userInputIsRed = "red".equalsIgnoreCase(userInput);
                 boolean userInputIsBlack = "black".equalsIgnoreCase(userInput);
                 boolean userInputIsValid = userInputIsRed || userInputIsBlack;
-                boolean cardIsRed = card.isRed();
+                boolean cardIsRed = card.getSuit().isRed();
                 boolean userIsCorrectAboutRed = cardIsRed && userInputIsRed;
                 boolean userIsCorrectAboutBlack = (!cardIsRed) && userInputIsBlack;
                 boolean userIsCorrect = userIsCorrectAboutBlack || userIsCorrectAboutRed;
@@ -49,6 +61,11 @@ public class RedOrBlackGame extends AbstractGame<RedOrBlackPlayer> {
                 }
             }
             deck.push(card);
-        } while (!"quit".equalsIgnoreCase(userInput));
+
+    }
+
+
+    public Card getCard() {
+        return card;
     }
 }

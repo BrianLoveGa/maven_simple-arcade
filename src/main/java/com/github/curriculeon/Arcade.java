@@ -8,17 +8,22 @@ import com.github.curriculeon.arcade.games.cardgames.highlowcard.HighLowCardGame
 import com.github.curriculeon.arcade.games.cardgames.highlowcard.HighLowPlayer;
 import com.github.curriculeon.arcade.games.cardgames.redorblack.RedOrBlackGame;
 import com.github.curriculeon.arcade.games.cardgames.redorblack.RedOrBlackPlayer;
+import com.github.curriculeon.arcade.games.cardgames.twentyone.TwentyOne;
+import com.github.curriculeon.arcade.games.cardgames.twentyone.TwentyOnePlayer;
 import com.github.curriculeon.arcade.games.numberguess.NumberGuessGame;
 import com.github.curriculeon.arcade.games.numberguess.NumberGuessPlayer;
 import com.github.curriculeon.arcade.games.slots.SlotsGame;
 import com.github.curriculeon.arcade.games.slots.SlotsPlayer;
 import com.github.curriculeon.utils.AnsiColor;
 import com.github.curriculeon.utils.IOConsole;
+import com.github.curriculeon.utils.IOSocketInterface;
+
+import java.util.StringJoiner;
 
 /**
  * Created by leon on 11/20/2020.
  */
-public class Arcade implements Runnable {
+public class Arcade implements Runnable, IOSocketInterface {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
     @Override
@@ -46,6 +51,8 @@ public class Arcade implements Runnable {
                         play(new NumberGuessGame(), new NumberGuessPlayer(arcadeAccount));
                     } else if ("HIGHLOWCARD".equalsIgnoreCase(gameSelectionInput)) {
                         play(new HighLowCardGame(), new HighLowPlayer(arcadeAccount));
+                    } else if ("TWENTYONE".equalsIgnoreCase(gameSelectionInput)) {
+                        play(new TwentyOne(), new TwentyOnePlayer(arcadeAccount));
                     } else if ("quit".equalsIgnoreCase(gameSelectionInput)) {
                         System.exit(0);
                     } else {
@@ -80,16 +87,27 @@ public class Arcade implements Runnable {
         return console.getStringInput(new StringBuilder()
                 .append("Welcome to the Game Selection Dashboard!")
                 .append("\nFrom here, you can select any of the following options:")
-                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ REDORBLACK ], [ HIGHLOWCARD ], [quit]")
+                .append("\n\t[ SLOTS ], [ NUMBERGUESS ], [ REDORBLACK ], [ HIGHLOWCARD ], [21], [quit]")
                 .toString());
     }
 
     private void play(Object gameObject, Object playerObject) {
+        IOConsole console = getIOConsole(AnsiColor.GREEN);
         GameInterface game = (GameInterface) gameObject;
         PlayerInterface player = (PlayerInterface) playerObject;
-        game.add(player);
-        game.setup();
-        game.run();
-        game.tearDown();
+        String userInput;
+        do {
+            String gameName = game.getClass().getSimpleName();
+            String userPrompt = new StringJoiner("\n")
+                    .add("Welcome back to the %s menu.")
+                    .add("From here, you can enter any of the following:")
+                    .add("\t[ play ], [ quit]")
+                    .toString();
+            userInput = console.getStringInput(userPrompt, gameName);
+            game.add(player);
+            game.setup();
+            game.run();
+            game.tearDown();
+        } while (!"quit".equalsIgnoreCase(userInput));
     }
 }

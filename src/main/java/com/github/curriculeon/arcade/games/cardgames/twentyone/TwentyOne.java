@@ -16,6 +16,9 @@ public class TwentyOne extends AbstractGame<TwentyOnePlayer> {
 
     private final Deck deck = new Deck();
 
+    ///make method to check if cards are 21 - variable number of inputs - 2 - 7 cards...
+
+
 
 
     @Override
@@ -48,10 +51,10 @@ public class TwentyOne extends AbstractGame<TwentyOnePlayer> {
 
                 userInput = player.play();
 
-                boolean hasTwentyOne = playerFirstCard.getRank().getValue() + playerSecondCard.getRank().getValue() == 21;
+                boolean hasTwentyOne = playerFirstCard.getRank().getPrimaryValue() + playerSecondCard.getRank().getPrimaryValue() == 21;
                 boolean hasTwentyOneAlt = playerFirstCard.getRank().getSecondaryValue() + playerSecondCard.getRank().getSecondaryValue() == 21;
-                boolean hasTwentyOneAltAlt = playerFirstCard.getRank().getSecondaryValue() + playerSecondCard.getRank().getValue() == 21;
-                boolean hasTwentyOneAltAlready = playerFirstCard.getRank().getValue() + playerSecondCard.getRank().getSecondaryValue() == 21;
+                boolean hasTwentyOneAltAlt = playerFirstCard.getRank().getSecondaryValue() + playerSecondCard.getRank().getPrimaryValue() == 21;
+                boolean hasTwentyOneAltAlready = playerFirstCard.getRank().getPrimaryValue() + playerSecondCard.getRank().getSecondaryValue() == 21;
 
 
                 if(userInput.equalsIgnoreCase("hit")){
@@ -66,7 +69,7 @@ public class TwentyOne extends AbstractGame<TwentyOnePlayer> {
                 // } else if(userInput.equalsIgnoreCase("stand")){
                     console.println("You chose to stand with those cards");
                     console.println("Now it's the dealers turn");
-                    if(dealerFirstCard.getRank().getValue() + dealerSecondCard.getRank().getValue() >= 16){
+                    if(dealerFirstCard.getRank().getPrimaryValue() + dealerSecondCard.getRank().getPrimaryValue() >= 16){
                         // dealer should stand
                     } else if (dealerFirstCard.getRank().getSecondaryValue() + dealerSecondCard.getRank().getSecondaryValue() >= 16){
                         // dealer should stand

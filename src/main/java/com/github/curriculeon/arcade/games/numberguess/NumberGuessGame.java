@@ -1,12 +1,11 @@
 package com.github.curriculeon.arcade.games.numberguess;
 
 import com.github.curriculeon.arcade.games.AbstractGame;
-import com.github.curriculeon.arcade.games.GameInterface;
-import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.utils.AnsiColor;
 import com.github.curriculeon.utils.IOConsole;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -22,13 +21,18 @@ public class NumberGuessGame extends AbstractGame<NumberGuessPlayer> {
     }
 
     @Override
+    public void tearDown(){
+        /// get fake user input to exit / quit
+    }
+
+    @Override
     public void run() {
         IOConsole console = getIOConsole(AnsiColor.GREEN);
         String guessInput = "";
         int good = 0;
         int bad = 0;
-        do {
-            List<String> winnerList = new ArrayList<>();
+
+            List<NumberGuessPlayer> winnerList = new ArrayList<>();
             int mysteryNumber = ThreadLocalRandom.current().nextInt(0, 10);
             for (NumberGuessPlayer player : getPlayerList()) {
                 guessInput = player.play();
@@ -36,7 +40,7 @@ public class NumberGuessGame extends AbstractGame<NumberGuessPlayer> {
                 String x = String.valueOf(mysteryNumber);
                 if (guessInput.equals(x)) {
                     console.println("You guessed the number :-) !! ");
-                    winnerList.add(player.getArcadeAccount().getName());
+                    getWinnerList().add(player);
                     good++;
                 } else {
                     console.println("you did not guess the number :-( ");
@@ -48,10 +52,14 @@ public class NumberGuessGame extends AbstractGame<NumberGuessPlayer> {
             console.println(winnerList.toString());
             console.println("correct = " + good + "  incorrect = " + bad);
 
-        } while (!"quit".equalsIgnoreCase(guessInput));
+
     }
 
     public int getMysteryNumber() {
         return mysteryNumber;
     }
+
+
+
+
 }

@@ -1,5 +1,7 @@
 package com.github.curriculeon.arcade;
 
+import com.github.curriculeon.arcade.games.cardgames.highlowcard.HighLowPlayer;
+
 /**
  * Created by leon on 7/21/2020.
  * `ArcadeAccount` is registered for each user of the `Arcade`.
@@ -31,5 +33,13 @@ public class ArcadeAccount {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "ArcadeAccount{" +
+                "name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

@@ -1,6 +1,5 @@
 package com.github.curriculeon.arcade.games;
 
-import com.github.curriculeon.arcade.games.PlayerInterface;
 import com.github.curriculeon.utils.IOSocketInterface;
 
 import java.util.List;
@@ -9,8 +8,8 @@ import java.util.List;
  * Created by leon on 7/21/2020.
  */
 public interface GameInterface<SomePlayerType extends PlayerInterface> extends IOSocketInterface, Runnable {
-    List<SomePlayerType> getPlayerList();
     List<SomePlayerType> getWinnerList();
+    List<SomePlayerType> getPlayerList();
 
     /**
      * adds a player to the game
@@ -44,6 +43,10 @@ public interface GameInterface<SomePlayerType extends PlayerInterface> extends I
      * specifies what to do when the game is completed
      */
     default void tearDown() {
+        removeAllPlayers();
+    }
 
+    default void removeAllPlayers() {
+        getPlayerList().clear();
     }
 }

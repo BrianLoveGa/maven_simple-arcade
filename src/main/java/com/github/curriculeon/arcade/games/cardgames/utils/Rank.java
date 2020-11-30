@@ -15,20 +15,20 @@ public enum Rank {
     QUEEN(12, 10),
     KING(13, 10);
 
-    private final int value;
+    private final int primaryValue;
     private final int secondaryValue;
 
-    Rank(int value, int secondaryValue) {
-        this.value = value;
+    Rank(int primaryValue, int secondaryValue) {
+        this.primaryValue = primaryValue;
         this.secondaryValue = secondaryValue;
     }
 
-    Rank(int value) {
-        this(value, value);
+    Rank(int primaryValue) {
+        this(primaryValue, primaryValue);
     }
 
-    public int getValue() {
-        return value;
+    public int getPrimaryValue() {
+        return primaryValue;
     }
 
     public int getSecondaryValue() {

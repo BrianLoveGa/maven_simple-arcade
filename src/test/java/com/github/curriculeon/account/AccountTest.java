@@ -1,4 +1,4 @@
-package com.github.curriculeon;
+package com.github.curriculeon.account;
 
 import com.github.curriculeon.arcade.ArcadeAccount;
 import org.junit.Assert;

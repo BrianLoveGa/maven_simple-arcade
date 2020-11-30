@@ -25,4 +25,8 @@ public enum AnsiColor {
         return color;
     }
 
+    AnsiColor(int ansiNumber) {
+        this.color = "\u001B[" + ansiNumber + "m";
+    }
+
 }

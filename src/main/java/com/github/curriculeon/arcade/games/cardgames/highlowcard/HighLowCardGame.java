@@ -14,7 +14,20 @@ import com.github.curriculeon.utils.IOConsole;
 
 public class HighLowCardGame extends AbstractGame<HighLowPlayer> {
 
-    private final Deck deck = new Deck();
+    private final Deck deck;
+
+    public HighLowCardGame() {
+        this(new Deck());
+    }
+
+    public HighLowCardGame(Deck deck) {
+        this.deck = deck;
+    }
+
+    @Override
+    public void setup() {
+        getDeck().shuffle();
+    }
 
     @Override
     public void run() {
@@ -22,7 +35,7 @@ public class HighLowCardGame extends AbstractGame<HighLowPlayer> {
         String userInput = null;
         int good = 0;
         int bad = 0;
-        do {
+
             deck.shuffle();
             Card card = deck.pop();
             for (HighLowPlayer player : getPlayerList()) {
@@ -31,8 +44,8 @@ public class HighLowCardGame extends AbstractGame<HighLowPlayer> {
                         "  Will the next card be [higher] , or [lower] ? or you can  [quit]");
                 userInput = player.play();
                 Card nextCard = deck.pop();
-                boolean cardIsHigher = card.getRank().getValue()<=nextCard.getRank().getValue();
-                boolean cardIsLower = card.getRank().getValue()>=nextCard.getRank().getValue();
+                boolean cardIsHigher = card.getRank().getPrimaryValue()<=nextCard.getRank().getPrimaryValue();
+                boolean cardIsLower = card.getRank().getPrimaryValue()>=nextCard.getRank().getPrimaryValue();
                 if(userInput.equalsIgnoreCase("higher") && cardIsHigher){
                     console.println("you guessed correct");
                     console.println("The value of the next card  [ %s ] was higher than [%s]", nextCard.toString(), card.toString());
@@ -55,6 +68,13 @@ public class HighLowCardGame extends AbstractGame<HighLowPlayer> {
             console.println(getWinnerList().toString());
 
 
-        } while (!"quit".equalsIgnoreCase(userInput));
+
     }
+
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+
 }
